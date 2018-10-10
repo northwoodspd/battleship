@@ -4,3 +4,8 @@ gem "mocha"
 gem "parallel"
 gem "minitest"
 gem "rake"
+
+
+gem "rspec"
+gem "pry"
+gem "pry-nav"
