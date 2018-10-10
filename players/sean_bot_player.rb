@@ -11,11 +11,11 @@ class SeanBotPlayer
   end
 
   def new_game
-    carrier = add_ship(5, :across)
-    titular_ship = add_ship(4, :down)
-    sub = add_ship(3, :across)
-    other_three_ship = add_ship(3, :down)
-    tiny_fucker = add_ship(2, :across)
+    carrier = add_ship(5)
+    titular_ship = add_ship(4)
+    sub = add_ship(3)
+    other_three_ship = add_ship(3)
+    tiny_fucker = add_ship(2)
 
     [ carrier, titular_ship, sub, other_three_ship, tiny_fucker ]
   end
@@ -24,12 +24,14 @@ class SeanBotPlayer
     @plays.delete_at(rand(@plays.length))
   end
 
-  def add_ship(size, orientation)
+  def add_ship(size)
     top_left = nil
     cells = nil
+    orientation = nil
     loop do
       top_left = @open_spaces[rand(@open_spaces.length)]
 
+      orientation = [:down, :across].sample
       if (orientation == :across)
         cells = (0..size-1).map { |x| [top_left.first + x, top_left.last] }
       else
