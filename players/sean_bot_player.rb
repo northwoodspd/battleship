@@ -32,11 +32,7 @@ class SeanBotPlayer
       top_left = @open_spaces[rand(@open_spaces.length)]
 
       orientation = [:down, :across].sample
-      if (orientation == :across)
-        cells = (0..size-1).map { |x| [top_left.first + x, top_left.last] }
-      else
-        cells = (0..size-1).map { |x| [top_left.first, top_left.last + x] }
-      end
+      cells = ship_cells(top_left[0], top_left[1], orientation, size)
 
       break if cells_available?(cells)
     end
@@ -44,6 +40,14 @@ class SeanBotPlayer
     remove_available_cells(cells)
 
     return top_left + [size, orientation]
+  end
+
+  def ship_cells(x, y, orientation, size)
+    if (orientation == :across)
+      return (0..size-1).map { |i| [x + i, y] }
+    else
+      return (0..size-1).map { |i| [x, y + i] }
+    end
   end
 
   def cells_available?(cells)
